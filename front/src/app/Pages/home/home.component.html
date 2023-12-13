@@ -1,0 +1,23 @@
+<app-nav-bar></app-nav-bar>
+<section class="ml-[172px] pt-8 grid grid-cols-2 gap-x-2.5 leading-10 h-fit">
+  <div class="mt-[100px]">
+    <h1 class="text-4xl font-bold uppercase pb-5">Mon diagnostic RGPD</h1>
+    <p class="text-xl leading-7 ">
+      Bonjour ! Je suis votre assistant pour la protection de données personnelles, je vais vous guider tout au long de vos démarches de conformité.
+      Estimons ensemble votre niveau de conformité, ensuite je vous propose mes conseils d’expert pour vous aider dans votre démarche.
+      On commence ?
+    </p>
+    <div class="leading-5 py-5">
+      <input (click)="check()" type="checkbox" name="j'accepte" value="yes">
+      <label>    J’autorise Tunisie RGPD à utiliser les informations complétées dans ce formulaire afin de me recontacter.</label>
+    </div>
+    <nav>
+      <button *ngIf="!is_checked" class="text-rgpd_secondary bg-rgpd_primary rounded-[10px] opacity-30 my-7 py-[13px] px-[47px] text-[23px]" disabled >Commencer</button>
+      <button *ngIf="is_checked" class="text-rgpd_secondary bg-rgpd_primary rounded-[10px] my-7 py-[13px] px-[47px] text-[23px]" [routerLink]="['exam/organisation']">Commencer</button>
+    </nav>
+  </div>
+  <div class="pl-32">
+    <img src="assets/home_avatar.svg" alt="avatar">
+  </div>
+
+</section>

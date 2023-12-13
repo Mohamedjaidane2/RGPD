@@ -1,0 +1,45 @@
+<div class="pb-16 lg:pb-28 xl:pb-44 ml-11 mt-11 container" >
+  <form (ngSubmit)="PostData(postForm)" #postForm="ngForm">
+
+    <div class="w-full lg:w-[130vh]">
+      <p class="text-center font-semibold text-lg lg:text-2xl">{{topicTitle}}</p>
+      <div class="mt-7" *ngFor="let question of Questions">
+
+          <div class="mt-7" *ngIf="question.type==='CHOIX_MULTIPLE'&& question.display " [ngClass]="{'sub-question-margin':question.suggestionSrc.length > 0 }">
+
+
+            <div class="font-medium text-lg" >{{question.refQ}} {{ question.title }}</div>
+            <div class="flex flex-col space-y-4 mt-4">
+
+              <div *ngFor="let suggestion of question.suggestions" class="suggestion-margin">
+                <label class="inline-flex items-center">
+                  <input ngModel  (change)="onCheckboxChange(question.id,suggestion.id)" name="{{question.id}}" type="checkbox" class="form-checkbox h-5 w-5 text-indigo-600" [value]="suggestion.id">
+                  <span class="ml-2 text-gray-700">{{ suggestion.title }}</span>
+                </label>
+              </div>
+            </div>
+          </div>
+
+
+          <div *ngIf="question.type!=='CHOIX_MULTIPLE' && question.display" [ngClass]="{'sub-question-margin':question.suggestionSrc.length > 0 }">
+            <div class="font-medium text-lg">{{question.refQ}} {{ question.title }}</div>
+            <select #select  ngModel name="{{question.id}}" (change)="onSelectChange(question.id,select)" class="select select-bordered w-full bg-rgpd_secondary suggestion-margin" required>
+              <option value="" disabled selected class="text-sm">Choisissez votre option...</option>
+              <option [value]="sugg.id" *ngFor="let sugg of question.suggestions">{{sugg.title}}</option>
+            </select>
+          </div>
+
+
+          </div>
+      </div>
+    <div class="mt-10 flex justify-between">
+
+        <span type="button" class="cursor-pointer bg-rgpd_secondary text-rgpd_primary border border-rgpd_primary hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-r">
+          Retour
+        </span>
+      <button [disabled]="!postForm.valid" type="submit"  class="bg-rgpd_primary text-rgpd_secondary hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-l">
+        Suivant
+      </button>
+    </div>
+  </form>
+</div>

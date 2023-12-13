@@ -1,0 +1,81 @@
+<div class=" p-4 rounded-lg max-w-full mt-7" >
+  <div>
+    <h1 class="text-3xl font-bold mb-4 border-b-2 pb-4 w-fit text-rgpd_primary">Coordonnées de l'invité et de l'organisation</h1>
+  </div>
+  <div class="grid grid-cols-2">
+      <div>
+        <div class="mb-4">
+          <p class="font-bold text-gray-700">Nom et prénom :</p>
+          <p class="text-gray-600"> {{responseTest.guest!.firstName}} {{responseTest.guest!.lastName}} </p>
+        </div>
+        <div class="mb-4">
+          <p class="font-bold text-gray-700">E-mail :</p>
+          <p class="text-gray-600"> {{responseTest.guest.email}} </p>
+        </div>
+        <div class="mb-4">
+          <p class="font-bold text-gray-700">Téléphone :</p>
+          <p class="text-gray-600"> {{responseTest.guest.telephone}}  </p>
+        </div>
+        <div class="mb-4">
+          <p class="font-bold text-gray-700">Fonction :</p>
+          <p class="text-gray-600"> {{responseTest.guest.function}}  </p>
+        </div>
+      </div>
+      <div>
+        <div class="mb-4">
+          <p class="font-bold text-gray-700">Nom de l'organisation :</p>
+          <p class="text-gray-600"> {{responseTest.guest!.organisation.name}} </p>
+        </div>
+        <div class="mb-4">
+          <p class="font-bold text-gray-700">Expertise en matière d'organisation :</p>
+          <p class="text-gray-600"> {{responseTest.guest!.organisation.expertiseField}} </p>
+        </div>
+        <div class="mb-4">
+          <p class="font-bold text-gray-700">Zone d'activité :</p>
+          <p class="text-gray-600"> {{activity_area_enumMapping[responseTest.guest!.organisation.activityArea]}} </p>
+        </div>
+        <div class="mb-4">
+          <p class="font-bold text-gray-700">Taille de votre entreprise :</p>
+          <p class="text-gray-600"> {{workforce_enumMapping[responseTest.guest!.organisation.workforce]}} </p>
+        </div>
+      </div>
+  </div>
+
+  <!-- Add more details here as needed -->
+</div>
+<div class=" pt-4 rounded-lg max-w-full">
+  <div>
+    <h1 class="text-3xl font-bold mb-4 border-b-2 pb-4 w-fit text-rgpd_primary">Réponses sélectionnées par le prospect</h1>
+  </div>
+
+  <div class="pb-8 lg:pb-8 xl:pb-8 ml-11 mt-11 container" *ngFor="let item of responseTopics;" >
+    <div class="w-full lg:w-[130vh]">
+      <div>
+        <h1 class="text-3xl font-bold mb-4  pb-4 w-fit text-rgpd_primary">{{item.topic!.title}}</h1>
+      </div>
+
+      <div class="mt-7" *ngFor="let qitem of item?.questions;">
+        <div class="mt-7" *ngIf="qitem.question.type==='CHOIX_MULTIPLE'">
+          <div class="font-medium text-lg">{{ qitem.question.title }}</div>
+          <div class="flex flex-col space-y-4 mt-4">
+
+            <div *ngFor="let suggestion of qitem?.answers;let k = index">
+              <label class="inline-flex items-center">
+                <!--<input [id]="suggestion.id" ngModel type="checkbox" class="form-checkbox h-5 w-5 text-indigo-600" checked=true>-->
+                <span class="ml-2 text-gray-700">{{ suggestion.title }}</span>
+              </label>
+            </div>
+          </div>
+        </div>
+
+        <div *ngIf="qitem.question.type!=='CHOIX_MULTIPLE'">
+          <label class="mb-4 text-base lg:text-lg">{{qitem.question.title}} </label>
+          <select [(ngModel)]="qitem.answers[0].title" class="select select-bordered w-full bg-rgpd_secondary" required>
+            <option  [defaultSelected]="qitem.answers[0].title" disabled selected>{{qitem.answers[0].title}}</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>

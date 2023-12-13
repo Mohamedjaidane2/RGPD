@@ -1,0 +1,27 @@
+<!-- Modal -->
+<input type="checkbox" id="confirm-question-delete" class="modal-toggle" />
+<div class="modal flex justify-center items-center">
+  <div class="modal-box border-1 rounded-md bg-rgpd_secondary shadow-lg">
+    <h3 class="font-bold text-lg text-center py-4">
+      Supprimer une question.
+    </h3>
+    <span class="text-rgpd_primary text-center flex justify-center text-Xl"
+      >La suppression de cette question entraîne également<br /> la suppression de sessuggestions!</span
+    >
+    <div class="modal-action flex justify-center mt-4">
+      <button
+        for="confirm-question-delete"
+        type="submit"
+        (click)="deleteQuestion()"
+        class="bg-rgpd_primary text-rgpd_secondary font-bold py-2 px-4 rounded disabled"
+      >
+        Confimer
+      </button>
+      <label
+        for="confirm-question-delete"
+        class="btn bg-gray-400 hover:bg-gray-500 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline ml-2"
+        >Annuler</label
+      >
+    </div>
+  </div>
+</div>

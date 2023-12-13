@@ -1,0 +1,50 @@
+<div class="pb-16 lg:pb-28 xl:pb-44 ml-11 mt-11 container" >
+ <form (ngSubmit)="AddOrganisation(postForm)" #postForm="ngForm">
+
+  <div class="w-full lg:w-[130vh]">
+  <p class="text-center font-semibold text-lg lg:text-2xl">À propos de votre entreprise</p>
+
+  <div class="mt-7 ">
+    <label for="Organisation-name" class="mb-4 text-base lg:text-lg">Nom de l'organisation</label>
+    <input type="text" ngModel #name="ngModel" name="name" id="Organisation-name" required placeholder="Entrez le nom de l'organisation" class="w-full pl-3 h-9 border-[0.9px] rounded-md  bg-rgpd_secondary" />
+    <span class="text-rgpd_primary text-sm" *ngIf="!name.valid && name.touched">Le nom de l'organisation ne doit pas être vide.</span>
+  </div>
+   <div class="mt-7 ">
+     <label for="expertise" class="mb-4 text-base lg:text-lg">Domaine d'expertise</label>
+     <input type="text" ngModel #expertise="ngModel" name="expertise" id="expertise" required placeholder="Entrez le domaine d'expertise" class="w-full pl-3 h-9 border-[0.9px] rounded-md  bg-rgpd_secondary" />
+     <span class="text-rgpd_primary text-sm" *ngIf="!expertise.valid && expertise.touched">Le domaine d'expertise ne doit pas être vide.</span>
+   </div>
+
+   <div class="mt-7">
+     <label for="activity" class="mb-4 text-base lg:text-lg">Zone d'activité </label>
+     <select ngModel #activity="ngModel" name="activity" id="activity" class="select select-bordered w-full bg-rgpd_secondary" required>
+       <option value="" disabled selected class="text-sm">Choisissez votre option...</option>
+       <option value="PRIVATE">Privé</option>
+       <option value="PUBLIC">Public</option>
+       <option value="ASSOCIATIVE">Associatif</option>
+     </select>
+     <span class="text-rgpd_primary text-sm" *ngIf="!activity.valid && activity.touched">La zone d'activité ne doit pas être vide.</span>
+   </div>
+
+   <div class="mt-7">
+     <label for="workforce" class="mb-4 text-base lg:text-lg">Taille de votre entreprise</label>
+     <select  ngModel #workforce="ngModel" name="workforce" id="workforce" required class="select select-bordered w-full bg-rgpd_secondary">
+       <option value="" disabled selected class="text-sm">Choisissez votre option...</option>
+       <option value="_0_50">0-50</option>
+       <option value="_50_100">50-100</option>
+       <option value="_100_500">100-500</option>
+       <option value="More">Plus</option>
+     </select>
+     <span class="text-rgpd_primary text-sm" *ngIf="!workforce.valid && workforce.touched">Les effectifs ne doivent pas être vides.</span>
+   </div>
+
+   <div class="mt-10 flex justify-between">
+    <div></div>
+     <button [disabled]="!postForm.valid" type="submit"  class="bg-rgpd_primary text-rgpd_secondary hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-l">
+       Suivant
+     </button>
+   </div>
+ </div>
+ </form>
+
+</div>

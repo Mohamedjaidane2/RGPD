@@ -1,0 +1,90 @@
+<label for="my-modal-7"  class=" z-10 cursor-pointer bg-rgpd_primary text-rgpd_secondary active:bg-rgpd_secondary font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150" type="button"
+>Créer une question</label>
+<!-- Modal -->
+<input type="checkbox" id="my-modal-7" class=" modal-toggle" />
+<div  class="modal  flex justify-center items-center ">
+  <div class="modal-box border-1 rounded-md bg-rgpd_secondary shadow-lg w-full max-w-lg md:max-w-5xl">
+    <h3 class="font-bold text-lg text-center py-4">Créer une question</h3>
+    <div class="alert bg-rgpd_secondary shadow-lg">
+      <div>
+        <svg xmlns="http://www.w3.org/2000/svg"  fill="none" viewBox="0 0 24 24" class="stroke-info flex-shrink-0 w-6 h-6 text-gray-500"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+        <div>
+          <div class="text-xs">[référence thème].[référence Question] , on doit respecter cette structure lors de L'insertion du référence</div>
+        </div>
+      </div>
+    </div>
+
+    <form class="px-4 md:px-8 py-4" (ngSubmit)="AddQuestion(postForm)" #postForm="ngForm" >
+      <div class="form-group mb-4">
+        <label for="question-ref" class="block text-gray-700 font-bold mb-">Référence Question</label>
+        <input ngModel placeholder="Saisir une référence"  #ref="ngModel" type="text"  id="question-ref" name="ref" class="bg-rgpd_secondary shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required>
+        <span class="text-rgpd_primary text-sm" *ngIf="!ref.valid && ref.touched">La référence ne doit pas être vide.</span>
+      </div>
+      <div class="form-group mb-4">
+        <label for="question-Title" class="block text-gray-700 font-bold mb-2">Titre de la question </label>
+        <input ngModel placeholder="Saisir un titre"  #title="ngModel" type="text"  id="question-Title" name="title" class="bg-rgpd_secondary shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required>
+        <span class="text-rgpd_primary text-sm" *ngIf="!title.valid && title.touched">Le titre ne doit pas être vide.</span>
+      </div>
+      <div class="form-group mb-4">
+        <label for="topic-id" class="block text-gray-700 font-bold mb-2">Affecté à</label>
+        <div class="relative">
+          <select ngModel #select placeholder="Titre" (change)="onSelectChange(select)" #topic="ngModel" type="text" id="topic-id" name="topic" class=" select-auto bg-rgpd_secondary shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required>
+            <option value="" disabled selected> Choisissez un question...</option>
+            <option *ngFor="let item of Topics" [value]="item.id">{{item.title}}</option>
+          </select>
+          <div class="absolute inset-y-0 right-0 flex items-center px-2 pointer-events-none">
+            <svg class="w-4 h-4 fill-current text-gray-500" viewBox="0 0 20 20">
+              <path d="M5 8l5 5 5-5"></path>
+            </svg>
+          </div>
+        </div>
+        <span class="text-rgpd_primary text-sm" *ngIf="!topic.valid && topic.touched">Il faut affecté un thème.</span>
+      </div>
+      <div class="form-group mb-4">
+        <label for="question-type" class="block text-gray-700 font-bold mb-2">Type de question</label>
+        <div class="relative">
+          <select ngModel #type="ngModel" type="text" id="question-type" name="type" class=" select-auto bg-rgpd_secondary shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required>
+            <option value="" disabled selected> Choisissez un type...</option>
+            <option value="CHOIX_MULTIPLE">Choix Multiple</option>
+            <option value="CHOIX_UNIQUE">Choix Unique</option>
+          </select>
+          <div class="absolute inset-y-0 right-0 flex items-center px-2 pointer-events-none">
+            <svg class="w-4 h-4 fill-current text-gray-500" viewBox="0 0 20 20">
+              <path d="M5 8l5 5 5-5"></path>
+            </svg>
+          </div>
+
+        <span class="text-rgpd_primary text-sm" *ngIf="!type.valid && type.touched">Le type ne doit pas être vide</span>
+        </div>
+        <label class="inline-flex items-center">
+          <div class="leading-5 py-5">
+            <input (click)="check()" type="checkbox" name="isSubQuestion" value="yes">
+            <label>   Ce question est une sous-question</label>
+          </div>
+        </label>
+        <div class="form-group mb-4">
+          <div  *ngIf="isSubQuestion">
+          <label for="suggestionSrc" class="block text-gray-700 font-bold mb-2">  Ce sous question va se declancher lorque on coche la suggestion suivante :</label>
+          <div class="relative">
+            <select multiple ngModel #sugg="ngModel" type="text" id="suggestionSrc" name="suggestionSrc" class=" select-auto bg-rgpd_secondary shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required>
+              <option value="" disabled selected> Choisissez une suggestion...</option>
+              <option *ngFor="let sug of sugestions" [value]="sug.id">{{sug.refS}}</option>
+            </select>
+            <div class="absolute inset-y-0 right-0 flex items-center px-2 pointer-events-none">
+              <svg class="w-4 h-4 fill-current text-gray-500" viewBox="0 0 20 20">
+                <path d="M5 8l5 5 5-5"></path>
+              </svg>
+            </div>
+          </div>
+          </div>
+          <!-- <span class="text-rgpd_primary text-sm" *ngIf="!sugg!.valid && sugg!.touched">le titre ne doit pas être vide</span>-->
+        </div>
+
+      </div>
+      <div class="modal-action flex justify-end mt-6">
+        <button [disabled]="!postForm.valid" type="submit" class="bg-rgpd_primary text-rgpd_secondary font-bold py-2 px-4 rounded ">Créer</button>
+        <label for="my-modal-7" class="btn bg-gray-400 hover:bg-gray-500 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline ml-2">Annuler</label>
+      </div>
+    </form>
+  </div>
+</div>

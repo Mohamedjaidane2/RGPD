@@ -1,0 +1,112 @@
+<div class="flex flex-col w-full mt-7">
+  <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
+    <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
+      <div class="flex gap-6 pb-5">
+        <div class="font-bold text-xl mb-2">Les invités</div>
+      </div>
+      <div class="flex justify-center" *ngIf="isLoading">
+        <app-loading-spinner></app-loading-spinner>
+      </div>
+      <! -- search bar -->
+      <div class="flex justify-between items-center mb-4" *ngIf="!isLoading" >
+        <div class="relative w-full">
+          <input  name="searchInput" [(ngModel)]="searchTerm" (input)="filterItems()"  type="text"  id="search-text" aria-describedby="search-text" class="bg-rgpd_secondary w-full pl-10 pr-4 py-2 rounded-lg shadow focus:outline-none focus:shadow-outline text-gray-600 font-medium" placeholder="Recherchez les utilisateur par e-mail ...">
+          <div class="absolute inset-y-0 left-0 flex items-center pl-3">
+            <svg class="h-6 w-6 text-gray-400" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor">
+              <path d="M21 21l-4.35-4.35M15.5 10.5a5 5 0 1 1-7.8 4.1 5 5 0 0 1 7.8-4.1"></path>
+            </svg>
+          </div>
+        </div>
+      </div>
+
+      <div class="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
+        <! -- table -->
+        <table class="min-w-full divide-y divide-gray-200" >
+          <thead class="bg-gray-50">
+          <tr>
+
+            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+              Prénom
+            </th>
+            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+              nom
+            </th>
+            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+              E-mail
+            </th>
+            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+              Téléphone
+            </th>
+            <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
+              Fonction
+            </th>
+            <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
+              Domaine d'expertise
+            </th>
+            <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
+              Profil
+            </th>
+            <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
+              Nom de l'organisation
+            </th>
+            <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
+              Zone d'activité
+            </th>
+            <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
+              Domaine d'expertise de l'organisation
+            </th>
+            <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
+              WorkForce
+            </th>
+            <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
+              Date de création
+            </th>
+          </tr>
+          </thead>
+          <tbody class="bg-white divide-y divide-gray-200">
+          <tr *ngFor="let item of filteredItems ">
+            <td class="px-6 py-4 whitespace-nowrap">
+              <div class="text-sm text-gray-900">{{item.firstName}}</div>
+            </td>
+            <td class="px-6 py-4 whitespace-nowrap">
+              <div class="text-sm text-gray-900">{{item.lastName}}</div>
+            </td>
+            <td class="px-6 py-4 whitespace-nowrap">
+              <div class="text-sm text-gray-900">{{item.email}}</div>
+            </td>
+            <td class="px-6 py-4 whitespace-nowrap">
+              <div class="text-sm text-gray-900">{{item.telephone}}</div>
+            </td>
+            <td class="px-6 py-4 whitespace-nowrap">
+              <div class="text-sm text-gray-900">{{item.function}}</div>
+            </td>
+            <td class="px-6 py-4 whitespace-nowrap">
+              <div class="text-sm text-gray-900">{{item.expertiseField}}</div>
+            </td>
+            <td class="px-6 py-4 whitespace-nowrap">
+              <div class="text-sm text-gray-900">{{profile_enumMapping[item.profile]}}</div>
+            </td>
+            <td class="px-6 py-4 whitespace-nowrap">
+              <div class="text-sm text-gray-900">{{item.organisation.name}}</div>
+            </td>
+            <td class="px-6 py-4 whitespace-nowrap">
+              <div class="text-sm text-gray-900">{{activity_area_enumMapping[item.organisation.activityArea]}}</div>
+            </td>
+            <td class="px-6 py-4 whitespace-nowrap">
+              <div class="text-sm text-gray-900">{{item.organisation.expertiseField}}</div>
+            </td>
+            <td class="px-6 py-4 whitespace-nowrap">
+              <div class="text-sm text-gray-900">{{workforce_enumMapping[item.organisation.workforce]}}</div>
+            </td>
+            <td class="px-6 py-4 whitespace-nowrap">
+              <div class="text-sm text-gray-900">{{item.created | date : "dd/MM/yyyy hh:mm:ss"}}</div>
+            </td>
+          </tr>
+          <!-- more rows -->
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+

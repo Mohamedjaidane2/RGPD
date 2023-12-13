@@ -1,0 +1,53 @@
+<div class="w-full " >
+<h1 class="font-semibold text-[20px] uppercase pb-5">Mon diagnostic RGPD</h1>
+  <P>Toute l'équipe Tunisie RGPD vous remercie d'avoir utilisé notre outil de diagnostic gratuit.
+    Par rapport aux réponses que vous avez saisi, votre niveau de maturité face à la conformité RGPD de votre entreprise est estimé à :</P>
+<div class="flex justify-center py-9">
+  <div class="flex items-center gap-9">
+    <div>
+      <figure class="figure">
+        <ng-container>
+          <svg viewBox="0 0 36 36" class="circular-chart blue" >
+            <title>Percentage chart showing  confidence level for this appraisal at {{test.score}}%</title>
+            <path
+              class="circle-bg"
+              d="M18 2.0845
+                  a 15.9155 15.9155 0 0 1 0 31.831
+                  a 15.9155 15.9155 0 0 1 0 -31.831"
+            />
+            <path
+              class="circle"
+              [attr.stroke-dasharray]="test.score"
+              d="M18 2.0845
+                  a 15.9155 15.9155 0 0 1 0 31.831
+                  a 15.9155 15.9155 0 0 1 0 -31.831"
+            />
+            <text x="18" y="22.35" class="percentage">{{test.score}}%</text>
+          </svg>
+      </ng-container>
+      <ng-template #noValue>
+        No Value
+      </ng-template>
+      </figure>
+      <figcaption class="figCaption">
+        <p class="__text">......................................</p>
+      </figcaption>
+
+      <!--<div class="radial-progress font-medium text-xl text-rgpd_primary" style="--value:{{test.score}};">{{test.score}}%</div>-->
+
+    </div>
+    <div class="font-medium text-xl">
+      <span class="text-rgpd_primary">{{test.penaltyJail}} ANS DE PRISON</span><br>
+      <span class="text-rgpd_primary">{{test.penaltyAmount}} DT</span>
+    </div>
+  </div>
+
+</div>
+  <p>Le diagnostic vous donne un aperçu du travail important qu'il vous reste à accomplir.
+    Mais pas de panique ! Parcourons ensemble le détail de vos résultats ainsi que la manière dont Mission RGPD peut vous aider pour atteindre une conformité optimale simplement et rapidement.</p>
+<div class=" flex justify-center py-9">
+  <button  class="z-10 bg-rgpd_primary text-rgpd_secondary active:bg-rgpd_secondary font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150" type="button">
+    Partager par email
+  </button>
+</div>
+</div>

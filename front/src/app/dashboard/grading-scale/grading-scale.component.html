@@ -1,0 +1,77 @@
+<div class="flex flex-col w-full mt-7">
+  <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
+    <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
+      <div class="flex gap-6 pb-5">
+        <div class="font-bold text-xl mb-2">Barème de notation</div>
+        <!-- The button to open modal -->
+        <app-creation-grading-scale-modal/>
+      </div>
+      <div class="flex justify-center" *ngIf="isLoading">
+        <app-loading-spinner></app-loading-spinner>
+      </div>
+      <! -- search bar -->
+      <div class="flex justify-between items-center mb-4" *ngIf="!isLoading" >
+        <div class="relative w-full">
+          <input  name="searchInput" [(ngModel)]="searchTerm" (input)="filterItems()"  type="text"  id="search-text" aria-describedby="search-text" class="bg-rgpd_secondary w-full pl-10 pr-4 py-2 rounded-lg shadow focus:outline-none focus:shadow-outline text-gray-600 font-medium" placeholder="Rechercher le barème de notation ...">
+          <div class="absolute inset-y-0 left-0 flex items-center pl-3">
+            <svg class="h-6 w-6 text-gray-400" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor">
+              <path d="M21 21l-4.35-4.35M15.5 10.5a5 5 0 1 1-7.8 4.1 5 5 0 0 1 7.8-4.1"></path>
+            </svg>
+          </div>
+        </div>
+      </div>
+
+      <div class="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
+        <! -- table -->
+        <table class="min-w-full divide-y divide-gray-200" >
+          <thead class="bg-gray-50">
+          <tr>
+
+            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+              Titre
+            </th>
+            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+              note
+            </th>
+            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+              État de la pénalité
+            </th>
+            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+              Montant de la pénalité
+            </th>
+            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+              pénalité prison
+            </th>
+
+            <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
+
+            </th>
+          </tr>
+          </thead>
+          <tbody class="bg-white divide-y divide-gray-200">
+          <tr *ngFor="let item of filteredItems ">
+            <td class="px-6 py-4 whitespace-nowrap">
+              <div class="text-sm text-gray-900">{{item.title}}</div>
+            </td>
+            <td class="px-6 py-4 whitespace-nowrap">
+              <div class="text-sm text-gray-900">{{item.penaltyStatus}}</div>
+            </td>
+            <td class="px-6 py-4 whitespace-nowrap">
+              <div class="text-sm text-gray-900">{{item.penaltyAmount}}</div>
+            </td>
+            <td class="px-6 py-4 whitespace-nowrap">
+              <div class="text-sm text-gray-900">{{item.penaltyJail}}</div>
+            </td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
+              <button class="text-rgpd_primary py-3 px-5 rounded-md bg-rgpd_secondary border-2 hover:text-red-900 mr-4" [routerLink]="['../topics/update', item.title]" >Editer</button>
+              <button class="text-rgpd_secondary p-3 rounded-md bg-rgpd_primary hover:text-red-900 mr-4"  (click)="deleteGradingScale(item.id)">Supprimer</button>
+            </td>
+          </tr>
+          <!-- more rows -->
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+

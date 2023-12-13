@@ -1,0 +1,52 @@
+<label for="my-modal-8"  class=" z-10 cursor-pointer bg-rgpd_primary text-rgpd_secondary active:bg-rgpd_secondary font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150" type="button"
+>Créer un Barème de notation</label>
+<!-- Modal -->
+<input type="checkbox" id="my-modal-8" class=" modal-toggle" />
+<div class="modal  flex justify-center items-center bg-rgpd_secondary ">
+  <div class="modal-box border-1 rounded-md bg-rgpd_secondary shadow-lg w-full max-w-lg md:max-w-5xl">
+    <h3 class="font-bold text-lg text-center py-4">Créer un barème de notation</h3>
+    <form class="px-4 md:px-8 py-4" (ngSubmit)="AddGradingScale(postForm)" #postForm="ngForm" >
+      <div class="form-group mb-4">
+        <label for="title" class="block text-gray-700 font-bold mb-">Titre</label>
+        <input ngModel placeholder="Entrez le titre ici"  #title="ngModel" type="text"  id="title" name="title" class="bg-rgpd_secondary shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required>
+        <span class="text-rgpd_primary text-sm" *ngIf="!title.valid && title.touched">Le titre ne doit pas être vide</span>
+      </div>
+      <div class="form-group mb-4">
+        <label for="penaltyAmount" class="block text-gray-700 font-bold mb-2">Montant de la pénalité</label>
+        <input ngModel placeholder="Saisir le montant de la pénalité"  #penaltyAmount="ngModel" type="number"  id="penaltyAmount" name="penaltyAmount" class="bg-rgpd_secondary shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required>
+        <span class="text-rgpd_primary text-sm" *ngIf="!penaltyAmount.valid && penaltyAmount.touched">le Montant de la pénalité ne doit pas être vide</span>
+      </div>
+      <div class="form-group mb-4">
+        <label for="penaltyJail" class="block text-gray-700 font-bold mb-2">Pénalité prison</label>
+        <input ngModel placeholder="Saisir la pénalité prison"  #penaltyJail="ngModel" type="number"  id="penaltyJail" name="penaltyJail" class="bg-rgpd_secondary shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required>
+        <span class="text-rgpd_primary text-sm" *ngIf="!penaltyJail.valid && penaltyJail.touched">La prison de pénalité ne devrait pas être vide</span>
+      </div>
+      <div class="form-group mb-4">
+        <label for="penaltyStatus" class="block text-gray-700 font-bold mb-2">L'état de la pénalité</label>
+        <div class="relative">
+          <select ngModel #penaltyStatus="ngModel" type="text" id="penaltyStatus" name="penaltyStatus" class=" select-auto bg-rgpd_secondary shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required>
+            <option value="" disabled selected class="text-sm">Veuillez sélectionner l'état de la pénalité</option>
+            <option value="CHECKED">Coché</option>
+            <option value="UNCHECKED">Non Coché</option>
+            <option value="INDETERMINATE">Indéterminé</option>
+          </select>
+          <div class="absolute inset-y-0 right-0 flex items-center px-2 pointer-events-none">
+            <svg class="w-4 h-4 fill-current text-gray-500" viewBox="0 0 20 20">
+              <path d="M5 8l5 5 5-5"></path>
+            </svg>
+          </div>
+        </div>
+        <span class="text-rgpd_primary text-sm" *ngIf="!penaltyStatus.valid && penaltyStatus.touched">l'état de pénalité ne doit pas être vide</span>
+      </div>
+      <div class="form-group mb-4">
+        <label for="score" class="block text-gray-700 font-bold mb-2">Score</label>
+        <input ngModel placeholder="ESaisir le score ici"  #title="ngModel" type="number"  id="score" name="score" class="bg-rgpd_secondary shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required>
+        <span class="text-rgpd_primary text-sm" *ngIf="!title.valid && title.touched">le Score ne doit pas être vide</span>
+      </div>
+      <div class="modal-action flex justify-end mt-6">
+        <button [disabled]="!postForm.valid" type="submit" class="bg-rgpd_primary text-rgpd_secondary font-bold py-2 px-4 rounded ">Créer</button>
+        <label for="my-modal-8" class="btn bg-gray-400 hover:bg-gray-500 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline ml-2">Annuler</label>
+      </div>
+    </form>
+  </div>
+</div>

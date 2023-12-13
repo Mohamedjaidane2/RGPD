@@ -1,0 +1,6 @@
+.ng-invalid button{
+  opacity: 10%;
+}
+.ng-invalid.ng-touched input{
+  border : 1px solid red;
+}

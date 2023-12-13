@@ -1,0 +1,30 @@
+
+<div class="flex justify-center" *ngIf="isLoading">
+  <app-loading-spinner></app-loading-spinner>
+</div>
+
+<div *ngIf="!isLoading">
+  <a
+    [routerLink]="['organisation']"
+    class="flex activeRoute items-center pointer-events-none justify-between text-gray-300 hover:text-rgpd_secondary hover:bg-rgpd_primary hover:border-gray-700 hover:shadow transition duration-300 ease-in-out rounded-lg py-2 px-4 bg-gray-700 border-l-4 border-transparent"
+    routerLinkActive="active-link"
+    [routerLinkActiveOptions]="{ exact: true }">
+    <span>À propos de votre entreprise</span>
+  </a>
+  <a
+    [routerLink]="['guest']"
+    class="flex activeRoute pointer-events-none items-center justify-between text-gray-300 hover:text-rgpd_secondary hover:bg-rgpd_primary hover:border-gray-700 hover:shadow transition duration-300 ease-in-out rounded-lg py-2 px-4 bg-gray-700 border-l-4 border-transparent"
+    routerLinkActive="active-link"
+    [routerLinkActiveOptions]="{ exact: true }">
+    <span>À propos de votre profil</span>
+  </a>
+  <a
+    [routerLink]="['/','exam',idTest,'topic', item.id]"
+    *ngFor="let item of Topics"
+    class="flex activeRoute items-center pointer-events-none justify-between text-gray-300 hover:text-rgpd_secondary hover:bg-rgpd_primary hover:border-gray-700 hover:shadow transition duration-300 ease-in-out rounded-lg py-2 px-4 bg-gray-700 border-l-4 border-transparent"
+    routerLinkActive="active-link"
+    [routerLinkActiveOptions]="{ exact: false }"
+  >
+    <span>{{ item?.title }}</span>
+  </a>
+</div>

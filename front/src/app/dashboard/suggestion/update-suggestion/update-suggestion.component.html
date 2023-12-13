@@ -1,0 +1,70 @@
+<div class="pb-16 lg:pb-28 xl:pb-44 ml-11 mt-11 container" >
+
+  <form (ngSubmit)="submit(postForm)" #postForm="ngForm" (keydown.enter)="$event.preventDefault()" >
+    <div class="flex justify-center" *ngIf="isLoading">
+      <app-loading-spinner></app-loading-spinner>
+    </div>
+    <div class="w-full lg:w-[130vh]" *ngIf="!isLoading">
+      <p class="text-center font-semibold text-lg lg:text-2xl">Modifier la Suggestion</p>
+      <div *ngIf="res_msg" class="flex items-center bg-rgpd-succ text-rgpd_secondary my-7 text-sm font-bold px-4 py-3" role="alert">
+        <svg class="fill-current w-4 h-4 mr-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M12.432 0c1.34 0 2.01.912 2.01 1.957 0 1.305-1.164 2.512-2.679 2.512-1.269 0-2.009-.75-1.974-1.99C9.789 1.436 10.67 0 12.432 0zM8.309 20c-1.058 0-1.833-.652-1.093-3.524l1.214-5.092c.211-.814.246-1.141 0-1.141-.317 0-1.689.562-2.502 1.117l-.528-.88c2.572-2.186 5.531-3.467 6.801-3.467 1.057 0 1.233 1.273.705 3.23l-1.391 5.352c-.246.945-.141 1.271.106 1.271.317 0 1.357-.392 2.379-1.207l.6.814C12.098 19.02 9.365 20 8.309 20z"/></svg>
+        <p>{{res_msg}}</p>
+      </div>
+      <div *ngIf="err_msg" class="flex items-center bg-rgpd_primary text-rgpd_secondary my-7 text-sm font-bold px-4 py-3" role="alert">
+        <svg class="fill-current w-4 h-4 mr-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M12.432 0c1.34 0 2.01.912 2.01 1.957 0 1.305-1.164 2.512-2.679 2.512-1.269 0-2.009-.75-1.974-1.99C9.789 1.436 10.67 0 12.432 0zM8.309 20c-1.058 0-1.833-.652-1.093-3.524l1.214-5.092c.211-.814.246-1.141 0-1.141-.317 0-1.689.562-2.502 1.117l-.528-.88c2.572-2.186 5.531-3.467 6.801-3.467 1.057 0 1.233 1.273.705 3.23l-1.391 5.352c-.246.945-.141 1.271.106 1.271.317 0 1.357-.392 2.379-1.207l.6.814C12.098 19.02 9.365 20 8.309 20z"/></svg>
+        <p>{{err_msg}}</p>
+      </div>
+
+      <div class="form-group mb-4">
+        <label for="sugg-ref" class="block text-gray-700 font-bold mb-">Suggestion Référence</label>
+        <input ngModel placeholder="Enter Title Here" [(ngModel)]="currentSuggestion.refS"  #ref="ngModel" type="text"  id="sugg-ref" name="ref" class="bg-rgpd_secondary shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required>
+        <span class="text-rgpd_primary text-sm" *ngIf="!ref.valid && ref.touched">la référence ne doit pas être vide</span>
+      </div>
+
+      <div class="form-group mb-4">
+        <label for="title" class="block text-gray-700 font-bold mb-2">Titre de la suggestion</label>
+        <input ngModel placeholder="Enter Title Here" [(ngModel)]="currentSuggestion.title"  #title="ngModel" type="text"  id="title" name="title" class="bg-rgpd_secondary shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required>
+        <span class="text-rgpd_primary text-sm" *ngIf="!title.valid && title.touched">le titre ne doit pas être vide</span>
+      </div>
+
+
+      <div class="form-group mb-4">
+        <label for="penaltyAmount" class="block text-gray-700 font-bold mb-2">Montant de la pénalité</label>
+        <input ngModel placeholder="Saisir le montant de la pénalité" [(ngModel)]="currentGradingScale.penaltyAmount"  #penaltyAmount="ngModel" type="number"  id="penaltyAmount" name="penaltyAmount" class="bg-rgpd_secondary shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required>
+        <span class="text-rgpd_primary text-sm" *ngIf="!penaltyAmount.valid && penaltyAmount.touched">le Montant de la pénalité ne doit pas être vide</span>
+      </div>
+
+      <div class="form-group mb-4">
+        <label for="penaltyJail" class="block text-gray-700 font-bold mb-2">Pénalité prison</label>
+        <input ngModel placeholder="Saisir la pénalité prison" [(ngModel)]="currentGradingScale.penaltyJail"  #penaltyJail="ngModel" type="number"  id="penaltyJail" name="penaltyJail" class="bg-rgpd_secondary shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required>
+        <span class="text-rgpd_primary text-sm" *ngIf="!penaltyJail.valid && penaltyJail.touched">La prison de pénalité ne devrait pas être vide</span>
+      </div>
+      
+      <div class="form-group mb-4">
+        <label for="penaltyStatus" class="block text-gray-700 font-bold mb-2">L'état de la pénalité</label>
+        <div class="relative">
+          <select ngModel #penaltyStatus="ngModel" type="text"  [(ngModel)]="currentGradingScale.penaltyStatus" id="penaltyStatus" name="penaltyStatus" class=" select-auto bg-rgpd_secondary shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required>
+            <option value="" disabled selected class="text-sm">Veuillez sélectionner l'état de la pénalité</option>
+            <option value="CHECKED">Coché</option>
+            <option value="UNCHECKED">Non Coché</option>
+            <option value="INDETERMINATE">Indéterminé</option>
+          </select>
+          <div class="absolute inset-y-0 right-0 flex items-center px-2 pointer-events-none">
+            <svg class="w-4 h-4 fill-current text-gray-500" viewBox="0 0 20 20">
+              <path d="M5 8l5 5 5-5"></path>
+            </svg>
+          </div>
+        </div>
+        <span class="text-rgpd_primary text-sm" *ngIf="!penaltyStatus.valid && penaltyStatus.touched">l'état de pénalité ne doit pas être vide</span>
+      </div>
+      
+          <!-- <span class="text-rgpd_primary text-sm" *ngIf="!sugg!.valid && sugg!.touched">le titre ne doit pas être vide</span>-->
+      <div class="flex gap-2 mt-7">
+        <button *ngIf="!title.value" class="disabled opacity-50 pointer-events-none text-rgpd_secondary p-3 rounded-md bg-rgpd_primary hover:text-red-900 mr-4" type="submit" >Mettre à jour</button>
+        <button *ngIf="title.value" class="text-rgpd_secondary p-3 rounded-md bg-rgpd_primary hover:text-red-900 mr-4" type="submit" >Mettre à jour</button>
+        <label class="cursor-pointer text-rgpd_primary p-3 rounded-md bg-rgpd_secondary border-2 hover:text-red-900 mr-4" (click)="goBack()" >Retour</label>
+      </div>
+        </div>
+
+  </form>
+</div>

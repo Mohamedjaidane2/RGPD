@@ -1,0 +1,21 @@
+<label for="my-modal-5"  class=" z-10 cursor-pointer bg-rgpd_primary text-rgpd_secondary active:bg-rgpd_secondary font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150" type="button"
+>Créer un thème</label>
+<!-- Modal -->
+<input type="checkbox" id="my-modal-5" class="modal-toggle" />
+<div class="modal flex justify-center items-center ">
+  <div class="modal-box border-1 rounded-md bg-rgpd_secondary shadow-lg w-full max-w-lg md:max-w-5xl">
+    <h3 class="font-bold text-lg text-center py-4">Créer un thème</h3>
+    <form class="px-4 md:px-8 py-4" (ngSubmit)="AddTopic(postForm)" #postForm="ngForm" >
+      <div class="form-group">
+        <label for="topic-name" class="block text-gray-700 font-bold mb-2">Nom du thème</label>
+        <input ngModel placeholder="Titre du thème"  #name="ngModel" type="text"  id="topic-name" name="name" class="bg-rgpd_secondary shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required>
+        <span class="text-rgpd_primary text-sm" *ngIf="!name.valid && name.touched">le titre ne doit pas être vide</span>
+        <span class="text-rgpd_primary text-sm" *ngIf="exists">Cet thème existe déjà.</span>
+      </div>
+      <div class="modal-action flex justify-end mt-4">
+        <button [disabled]="!postForm.valid" for="my-modal-5" type="submit" class="bg-rgpd_primary text-rgpd_secondary font-bold py-2 px-4 rounded disabled">Créer</button>
+        <label  for="my-modal-5" class="btn bg-gray-400 hover:bg-gray-500 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline ml-2">Annuler</label>
+      </div>
+    </form>
+  </div>
+</div>

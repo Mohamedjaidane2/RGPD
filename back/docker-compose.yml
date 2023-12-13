@@ -1,0 +1,18 @@
+version: '3'
+services:
+  mongo_db:
+    container_name: rgpd-mongo
+    image: mongo:latest
+    restart: always
+    hostname: mongodb
+    volumes:
+      - /data/db:/data/db
+    ports:
+      - "27017:27017"
+  app:
+    container_name: rgpd-web-backend
+    image: medba/rgpd-app-backend:1.0
+    ports:
+      - "8080:8080"
+    depends_on:
+      - mongo_db
